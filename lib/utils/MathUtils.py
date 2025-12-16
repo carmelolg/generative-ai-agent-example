@@ -1,3 +1,6 @@
+"""
+Module providing mathematical utility functions.
+"""
 def cosine_similarity(a, b):
         """
         Compute the cosine similarity between two vectors.

@@ -1,5 +1,10 @@
-from lib import OllamaUtils as OllamaUtils
-from lib import MathUtils as MathUtils
+"""
+Knowledge Service Module
+Provides functions to build a knowledge graph from a dataset and retrieve relevant chunks based on a query.
+"""
+
+from lib.utils import OllamaUtils as OllamaUtils, MathUtils as MathUtils
+
 
 def build_knowledge(dataset):
     """Builds a knowledge graph from a dataset.
@@ -29,9 +34,10 @@ def get_most_relevant_chunks(query, knowledge, top_n=3):
         similarities = []
         for chunk, embedding in knowledge:
             similarity = MathUtils.cosine_similarity(query_embedding, embedding)
-            #print(embedding, query_embedding, similarity)
             similarities.append((chunk, similarity))
+
         # Sort by similarity in descending order, because higher similarity means more relevant chunks
         similarities.sort(key=lambda x: x[1], reverse=True)
+
         # Finally, return the top N most relevant chunks
         return similarities[:top_n]

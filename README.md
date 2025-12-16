@@ -6,7 +6,7 @@ Educational project for Python developers wanting to build generative agents wit
 ## Key Features
 
 - **ReAct Agent with Ollama**: uses qwen3:latest and nomic-embed-text:latest for reasoning and tool calling.
-- **Two specific tools**: get_spell_info() for exact spells, search_spells() for searches.
+- **Two specific tools**: get_spell_name() for exact spells, get_spell_use() for the spell's use.
 - **Zero external dependencies**: only ollama==0.6.1, python-dotenv==1.2.1, requests.
 - **Works offline**: local Ollama models, Hogwarts API requires internet only for queries.
 - **Robust error handling**: fallback for failed APIs or spells not found.
@@ -44,6 +44,8 @@ Edit `.env` to customize:
 EMBEDDING_MODEL=nomic-embed-text:latest
 LANGUAGE_MODEL=qwen3:latest
 HOGWARTS_API_HOST=https://potterapi-fedeperin.vercel.app
+HOGWARTS_API_LANG=en
+HOGWARTS_API_SPELLS_PATH=spells
 ```
 
 Start Ollama in background: `ollama serve`.
@@ -53,13 +55,7 @@ Start Ollama in background: `ollama serve`.
 Start the interactive agent:
 
 ```bash
-python agent.py
-```
-
-Or run a direct prompt:
-
-```bash
-python agent.py "What does Expecto Patronum do?"
+python hogwarts-agent-chat.py
 ```
 
 The agent will reason step-by-step, call necessary tools, and return the response.
@@ -70,30 +66,36 @@ The agent will reason step-by-step, call necessary tools, and return the respons
 
 ```
 Input: "Describe Wingardium Leviosa"
-Output: Agent calls get_spell_info, fetches "Levitation charm" and description from API.
+Output: The use of the spell **Wingardium Leviosa** is to levitate objects.
 ```
 
 **Exploratory search**:
 
 ```
-Input: "What spells are used for flying?"
-Output: Uses search_spells, lists relevant results with reasoning on flight.
+Input: "What spells are used for turn on a light?"
+Output: The spell to turn on a light is **Lumos**.
 ```
-
-Hogwarts API: https://potterapi-fedeperin.vercel.app 
 
 ## Project Architecture
 
 ```
-├── lib                         # Folder for reusable modules 
-│   ├── HttpService.py          # HTTP calls to Hogwarts API
-│   ├── KnowledgeService.py     # Spell search and retrieval tools
-│   ├── MathUils.py             # Math helper functions (if needed)
-│   ├── OllamaUtils.py          # Ollama model interaction helpers
-│   └── SpellFunctions.py       # Spell-specific tool implementations
-├── .env                        # Environment variables
-├── hogwards-agent.py           # the main agent logic
-└── requirements.txt            # Minimal dependencies
+├── lib                                  
+│   ├── service                  
+│   │   ├── HogwartsHttpService.py      # HTTP calls to Hogwarts API
+│   │   └── KnowledgeService.py         # Spell search and retrieval tools
+│   ├── tool                     
+│   │   └── HogwartsSpellTools.py       # Spell-specific tools implementations
+│   ├── utils                     
+│   │   ├── EnvironmentVariables.py     # Singleton for access to env variables
+│   │   ├── MathUils.py                 # Math helper functions (if needed)
+│   │   ├── OllamaUtils.py              # Ollama model interaction helpers
+│   │   └── PromptUtils.py              # Prompt message utilities
+├── .env                                # Environment variables
+├── hogwarts-agent.py                   # the main agent logic
+├── hogwarts-agent-chat.py              # the charbot that use agent logic
+├── README.md                           # Repository docs
+├── LICENSE.md                          # License distribution refs
+└── requirements.txt                    # Minimal dependencies
 ```
 
 - **OllamaLLM + Embeddings**: local models for reasoning and context.
@@ -108,14 +110,6 @@ Hogwarts API: https://potterapi-fedeperin.vercel.app
 - Integrate RAG: use embeddings for local documents.
 - Deploy: wrap in FastAPI for API endpoints.
 - Multi-tool: expand with calculator or file I/O.
-
-## Best Practices
-
-- **Logging**: enable verbose for reasoning debug.
-- **Rate limiting**: handle API delays with `time.sleep`.
-- **Offline testing**: mock API for local development.
-- **API Key**: none required, all local except Hogwarts API.
-- **Updates**: `pip install -U -r requirements.txt` + pull models.
 
 ## License
 

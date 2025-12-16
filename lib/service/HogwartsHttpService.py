@@ -1,12 +1,28 @@
+"""
+HTTP Service for making requests to the Hogwarts API.
+"""
 from typing import Any
-
 import requests
-import os
-from dotenv import load_dotenv
+from lib.utils.EnvironmentVariables import EnvironmentVariables
 
-load_dotenv()
+env = EnvironmentVariables()
 
-def get(endpoint: str, language: str = 'en') -> Any | None:
+def get_spells() -> Any | None:
+    """
+    Makes a GET request to the Hogwarts API to retrieve spells.
+
+    Returns:
+        dict: The JSON response from the API.
+    """
+    endpoint = env.get_hogwarts_api_spells_path()
+    if endpoint:
+        return _get(endpoint)
+    else:
+        print(f"An error occurred: {endpoint} not valid.")
+        return None
+
+
+def _get(endpoint: str, language: str = env.get_hogwarts_api_lang()) -> Any | None:
     """
     Makes a GET request to the Hogwarts API.
 
@@ -19,7 +35,7 @@ def get(endpoint: str, language: str = 'en') -> Any | None:
     """
 
     # Get the base URL from the environment variables
-    base_url = os.getenv('HOGWARTS_API_HOST')
+    base_url = env.get_hogwarts_api_host()
 
     try:
         # Make the GET request to the API

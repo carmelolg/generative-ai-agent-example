@@ -1,4 +1,4 @@
-agent-test.py
+test/agent-test.py
 #Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -6,7 +6,7 @@ __pycache__/
 
 # C extensions
 *.so
-
+*test*
 # Distribution / packaging
 .Python
 build/
