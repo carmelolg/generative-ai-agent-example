@@ -85,4 +85,4 @@ def chat_with_tools(
         _messages.append({'role': 'assistant', 'content': assistant_prompt})
 
     # generate the final response
-    return _ollama_client.chat(model=LANGUAGE_MODEL, messages=_messages, tools=tools.values(), stream=True, think=True)
+    return _ollama_client.chat(model=LANGUAGE_MODEL, messages=_messages, tools=tools.values(), stream=True, think=False)
