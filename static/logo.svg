@@ -1,0 +1,32 @@
+<svg width="520" height="120" viewBox="0 0 520 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Icon: nodes flowing into stacked documents for GenAI Agent -->
+  <g transform="translate(20,20)">
+    <!-- Edges -->
+    <line x1="20" y1="20" x2="50" y2="35" stroke="#0FA3B1" stroke-width="2"/>
+    <line x1="20" y1="60" x2="50" y2="45" stroke="#0FA3B1" stroke-width="2"/>
+    <line x1="20" y1="40" x2="50" y2="40" stroke="#0FA3B1" stroke-width="2"/>
+    <!-- Left nodes (neural inputs) -->
+    <circle cx="20" cy="20" r="6" fill="#2A7DE1"/>
+    <circle cx="20" cy="40" r="6" fill="#2A7DE0"/>
+    <circle cx="20" cy="60" r="6" fill="#2A7DE1"/>
+    <!-- Middle node (AI agent core) -->
+    <circle cx="50" cy="40" r="7" fill="#27C29F"/>
+    <!-- Stacked documents (generative output / RAG) -->
+    <rect x="75" y="20" width="40" height="30" rx="3" fill="none" stroke="#CED4DA" stroke-width="2"/>
+    <rect x="80" y="28" width="30" height="2" fill="#CED4DA"/>
+    <rect x="80" y="34" width="24" height="2" fill="#CED4DA"/>
+    <rect x="80" y="40" width="18" height="2" fill="#CED4DA"/>
+
+    <rect x="85" y="38" width="40" height="30" rx="3" fill="none" stroke="#8D99AE" stroke-width="2"/>
+    <rect x="90" y="46" width="30" height="2" fill="#8D99AE"/>
+    <rect x="90" y="52" width="24" height="2" fill="#8D99AE"/>
+  </g>
+
+  <!-- Repository name -->
+  <text x="160" y="65"
+        font-family="SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace"
+        font-size="20"
+        fill="#E9ECEF">
+    generative-ai-agent-example
+  </text>
+</svg>

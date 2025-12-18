@@ -1,7 +1,11 @@
 # Generative AI Agent Example
 
+![logo](static/logo.svg)
+
 Minimal **AI Agent** example using **Ollama** locally to fetch Hogwarts spells from a dedicated API.  
 Educational project for Python developers wanting to build generative agents with minimal dependencies (only ollama, python-dotenv, requests).
+
+[![Watch the video](https://raw.githubusercontent.com/carmelolg/generative-ai-agent-example/master/static/thumbnail.jpg)](https://raw.githubusercontent.com/carmelolg/generative-ai-agent-example/master/static/hogwarts-expert-on-fire.mov)
 
 ## Key Features
 
@@ -48,17 +52,30 @@ HOGWARTS_API_LANG=en
 HOGWARTS_API_SPELLS_PATH=spells
 ```
 
-Start Ollama in background: `ollama serve`.
-
 ## Running the Agent
 
 Start the interactive agent:
 
 ```bash
-python hogwarts-agent-chat.py
+python hogwarts-agent-chat.py # Command line chat interface
+# OR
+python hogwarts-gui-chat.py # GUI chat interface available on http://localhost:8080
+```
+The agent will reason step-by-step, call necessary tools, and return the response.
+
+## Running on Docker    
+Create this shell script:
+```shell
+#!/bin/bash
+docker build . -t carmelolg/hogwarts-gui-chat
+docker run -d -p8080:8080 carmelolg/hogwarts-gui-chat
 ```
 
-The agent will reason step-by-step, call necessary tools, and return the response.
+run on the terminal the following commands:
+```shell
+chmod +x [NAME_OF_YOUR_SCRIPT].sh
+./[NAME_OF_YOUR_SCRIPT].sh
+```
 
 ## Usage Examples
 
@@ -111,9 +128,11 @@ Output: The spell to turn on a light is **Lumos**.
 - Deploy: wrap in FastAPI for API endpoints.
 - Multi-tool: expand with calculator or file I/O.
 
-## License
 
-![CC BY-NC-SA 4.0](https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png)
+# License
 
-**Creative Commons Attribution-NonCommercial-ShareAlike 4.0 (CC BY-NC-SA 4.0)**.  
-See `LICENSE` for details. Fork freely for non-commercial projects.
+![CC BY-NC-ND 4.0](https://licensebuttons.net/l/by-nc-nd/4.0/88x31.png)
+
+This project is licensed under the **Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)**. 
+
+See `LICENSE.md` for the full license text.
