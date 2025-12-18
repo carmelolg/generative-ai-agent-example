@@ -5,7 +5,8 @@
 Minimal **AI Agent** example using **Ollama** locally to fetch Hogwarts spells from a dedicated API.  
 Educational project for Python developers wanting to build generative agents with minimal dependencies (only ollama, python-dotenv, requests).
 
-[![Watch the video](https://raw.githubusercontent.com/carmelolg/generative-ai-agent-example/master/static/thumbnail.jpg)](https://raw.githubusercontent.com/carmelolg/generative-ai-agent-example/master/static/hogwarts-expert-on-fire.mov)
+![](static/hogwarts-expert-on-fire.gif)
+
 
 ## Key Features
 
