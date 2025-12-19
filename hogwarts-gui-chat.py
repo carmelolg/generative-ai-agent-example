@@ -8,9 +8,9 @@ from lib.utils import PromptUtils, OllamaUtils
 functions = HogwartsSpellTools.available_functions()
 
 def chat(user_prompt: str):
-    return OllamaUtils.chat_with_tools(user_prompt=user_prompt,
-                                system_prompt=PromptUtils.get_system_prompt(),
-                                tools=functions)
+    return OllamaUtils.chat(user_prompt=user_prompt,
+                            system_prompt=PromptUtils.get_system_prompt(),
+                            tools=functions)
 def root():
 
     async def send() -> None:

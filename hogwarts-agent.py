@@ -8,6 +8,6 @@ user_prompt = "What spell would I use to turn on a light?"
 # get available functions
 functions = HogwartsSpellTools.available_functions()
 
-stream = OllamaUtils.chat_with_tools(user_prompt=user_prompt, system_prompt=PromptUtils.get_system_prompt(), tools=functions)
+stream = OllamaUtils.chat(user_prompt=user_prompt, system_prompt=PromptUtils.get_system_prompt(), tools=functions)
 for chunk in stream:
     print(chunk['message']['content'], end='', flush=True)

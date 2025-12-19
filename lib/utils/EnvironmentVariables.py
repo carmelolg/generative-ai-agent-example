@@ -26,9 +26,9 @@ class EnvironmentVariables:
         return os.getenv("HOGWARTS_API_HOST", default)
 
     @staticmethod
-    def get_hogwarts_api_lang(default: str = None) -> str:
-        return os.getenv("HOGWARTS_API_LANG", default)
-
-    @staticmethod
     def get_hogwarts_api_spells_path(default: str = None) -> str:
         return os.getenv("HOGWARTS_API_SPELLS_PATH", default)
+
+    @staticmethod
+    def get_thinking_mode(default: str = None) -> str:
+        return os.getenv("THINKING_MODE", default)

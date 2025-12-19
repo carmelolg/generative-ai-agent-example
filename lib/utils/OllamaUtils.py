@@ -8,7 +8,8 @@ from lib.utils.EnvironmentVariables import EnvironmentVariables
 env = EnvironmentVariables()
 
 EMBEDDING_MODEL = env.get_embedding_model('nomic-embed-text:latest')
-LANGUAGE_MODEL = env.get_language_model('qwen3:1.7b')
+LANGUAGE_MODEL = env.get_language_model('qwen3:lates')
+THINKING_MODE= env.get_thinking_mode('True')
 
 def embed_text(text: str) -> List[float]:
     """
@@ -18,41 +19,7 @@ def embed_text(text: str) -> List[float]:
     """
     return _ollama_client.embed(model=EMBEDDING_MODEL, input=text)['embeddings'][0]
 
-
 def chat(
-        user_prompt: str,
-        system_prompt: str = None,
-        assistant_prompt: str = None
-):
-    """
-    Facilitates a chat interaction with the specified language model.
-    :param user_prompt:
-    :param system_prompt:
-    :param assistant_prompt:
-    :return:
-    """
-    _messages = []
-    if system_prompt is not None:
-        _messages.append({'role': 'system', 'content': system_prompt})
-    if assistant_prompt is not None:
-        _messages.append({'role': 'assistant', 'content': assistant_prompt})
-
-    _messages.append({'role': 'user', 'content': user_prompt})
-
-    stream = _ollama_client.chat(
-        model=LANGUAGE_MODEL,
-        messages=_messages,
-        stream=True,
-        think=True
-    )
-
-    # print the response from the chatbot in real-time
-    print('Assistant >', end=' ')
-    for chunk in stream:
-        print(chunk['message']['content'], end='', flush=True)
-
-
-def chat_with_tools(
         user_prompt: str,
         tools: dict,
         system_prompt: str = None,
@@ -67,7 +34,7 @@ def chat_with_tools(
     :return:
     """
     _messages = [{"role": "user", "content": user_prompt}]
-    response = _ollama_client.chat(model=LANGUAGE_MODEL, messages=_messages, tools=tools.values(), think=True)
+    response = _ollama_client.chat(model=LANGUAGE_MODEL, messages=_messages, tools=tools.values(), think=THINKING_MODE)
     _messages.append(response.message)
 
     if response.message.tool_calls:

@@ -21,13 +21,10 @@ Educational project for Python developers wanting to build generative agents wit
 
 - **Python 3.10+**
 - **Ollama** installed and running (`ollama serve`)
-- Ollama models: `ollama pull qwen3:latest` and `ollama pull nomic-embed-text:latest`
-- `.env` file with `HOGWARTS_API_HOST=https://potterapi-fedeperin.vercel.app`
+- Ollama models with tools or thinking feature
+- Ollama models with embedding support
+- .env file with all properties specified in Configuration section
 
-```bash
-ollama pull qwen3:latest
-ollama pull nomic-embed-text:latest
-```
 
 ## Installation
 
@@ -46,10 +43,13 @@ Create the `.env` file with the variables listed in prerequisites.
 Edit `.env` to customize:
 
 ```
+# Required
 EMBEDDING_MODEL=nomic-embed-text:latest
 LANGUAGE_MODEL=qwen3:latest
+THINKING_MODE=True
+
+# Optional
 HOGWARTS_API_HOST=https://potterapi-fedeperin.vercel.app
-HOGWARTS_API_LANG=en
 HOGWARTS_API_SPELLS_PATH=spells
 ```
 
