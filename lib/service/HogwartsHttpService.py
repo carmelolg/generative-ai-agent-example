@@ -16,12 +16,12 @@ def get_spells() -> Any | None:
     """
     spells = _get()
     if spells is None:
-        with open('static/en_spells.json') as json_file:
+        with open('static/en_spells_v2.json') as json_file:
             return json.load(json_file)
     return None
 
 
-def _get(base_url: str = env.get_hogwarts_api_host(), endpoint: str =env.get_hogwarts_api_spells_path(), language: str = env.get_hogwarts_api_lang('en')) -> Any | None:
+def _get(base_url: str = env.get_hogwarts_api_host(), endpoint: str =env.get_hogwarts_api_spells_path(), language: str = 'en') -> Any | None:
     """
     Makes a GET request to the Hogwarts API.
 

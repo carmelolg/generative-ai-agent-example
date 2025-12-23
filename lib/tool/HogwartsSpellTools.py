@@ -23,6 +23,10 @@ def get_spell_use(spell: str) -> dict:
         The use of the spell and the similarity score
     """
     spells = HogwartsHttpService.get_spells()
+
+    if spells is None or len(spells) == 0:
+        return {'result': "Not found", 'similarity': 0.0}
+
     spell_db = KnowledgeService.build_knowledge(list(map(_map_spell, spells)))
 
     most_relevant_spells = KnowledgeService.get_most_relevant_chunks(spell.lower(), spell_db, top_n=1)
@@ -41,6 +45,10 @@ def get_spell_name(use: str) -> dict:
         The name of the spell and the similarity score
     """
     spells = HogwartsHttpService.get_spells()
+
+    if spells is None or len(spells) == 0:
+        return {'result': "Not found", 'similarity': 0.0}
+
     use_db = KnowledgeService.build_knowledge(list(map(_map_use, spells)))
 
     most_relevant_use = KnowledgeService.get_most_relevant_chunks(use.lower(), use_db, top_n=1)
