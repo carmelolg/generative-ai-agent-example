@@ -43,4 +43,4 @@ def root():
             .classes('[&_a]:text-inherit [&_a]:no-underline [&_a]:font-medium')
 
 
-ui.run(root, title='Hogwarts Spell Chatbot', favicon='🪄', show_welcome_message=True, reconnect_timeout=60)
+ui.run(root, title='Hogwarts Spell Chatbot', favicon='🪄', show_welcome_message=True, reconnect_timeout=6000)

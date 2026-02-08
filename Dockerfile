@@ -1,29 +1,38 @@
-# Use an official Python runtime as a parent image
-FROM python:3.11-slim
-
-# Set the working directory in the container
+# syntax=docker/dockerfile:1
+FROM python:3.11-slim AS builder
 WORKDIR /app
 
-# Install curl
-RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+# Dipendenze di build per creare wheel (solo nel builder)
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends build-essential gcc libffi-dev libssl-dev zlib1g-dev \
+ && rm -rf /var/lib/apt/lists/*
 
-# Install Ollama
-RUN curl -fsSL https://ollama.com/install.sh | sh
-
-# Copy the requirements file into the container
 COPY requirements.txt .
+RUN python -m pip install --upgrade pip setuptools wheel \
+ && pip wheel --wheel-dir=/wheels -r requirements.txt
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+FROM python:3.11-slim
+ENV PYTHONUNBUFFERED=1
+WORKDIR /app
 
-# Copy the rest of the application code into the container
+# Solo runtime deps necessari (curl per l'installer di Ollama, zstd per decompressione)
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends curl zstd ca-certificates \
+ && rm -rf /var/lib/apt/lists/*
+
+# Copia le wheel prodotte e installa senza accedere a PyPI
+COPY --from=builder /wheels /wheels
+COPY requirements.txt .
+RUN python -m pip install --no-cache-dir --no-index --find-links=/wheels -r requirements.txt \
+ && rm -rf /wheels
+
+# Installa Ollama (rimuove eventuali temp dell'installer)
+RUN curl -fsSL https://ollama.com/install.sh | sh \
+ && rm -rf /var/lib/apt/lists/*
+
+# App
 COPY . .
-
-# Make the start script executable
 RUN chmod +x run-docker.sh
 
-# Expose the port the app runs on
 EXPOSE 8080
-
-# Define the entrypoint for the container
 ENTRYPOINT ["./run-docker.sh"]
