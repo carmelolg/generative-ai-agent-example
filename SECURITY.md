@@ -6,8 +6,7 @@
 |-----------|---------|----------------|
 | Python    | 3.12.x  | ✅ Recommended |
 | Python    | 3.11.x  | ✅ Supported   |
-| Python    | 3.10.x  | ⚠️ Minimum     |
-| Python    | < 3.10  | ❌ Not Supported |
+| Python    | < 3.11  | ❌ Not Supported |
 
 ## Security Update Process
 
