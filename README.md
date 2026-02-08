@@ -130,6 +130,37 @@ Output: The spell to turn on a light is **Lumos**.
 - Multi-tool: expand with calculator or file I/O.
 
 
+## Security and Dependency Management
+
+### Current Security Status
+- All dependencies pinned to latest secure versions
+- No known vulnerabilities (verified with pip-audit)
+- Python 3.12 base image for Docker (supported until October 2028)
+
+### Dependency Scanning
+To check for security vulnerabilities in dependencies:
+
+```bash
+# Install pip-audit
+pip install pip-audit
+
+# Scan dependencies
+pip-audit -r requirements.txt
+```
+
+### Keeping Dependencies Updated
+It is recommended to:
+1. Regularly check for dependency updates using `pip list --outdated`
+2. Review changelogs before updating to avoid breaking changes
+3. Run `pip-audit` after updates to verify security
+4. Consider enabling GitHub Dependabot for automated dependency updates
+
+### Supported Versions
+- **Python**: 3.11+ (3.12 recommended)
+- **Ollama**: 0.6.1
+- **Docker**: Latest stable with Python 3.12-slim base image
+
+
 # License
 
 ![CC BY-NC-ND 4.0](https://licensebuttons.net/l/by-nc-nd/4.0/88x31.png)
