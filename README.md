@@ -19,7 +19,7 @@ Educational project for Python developers wanting to build generative agents wit
 
 ## Prerequisites
 
-- **Python 3.10+**
+- **Python 3.11+**
 - **Ollama** installed and running (`ollama serve`)
 - Ollama models with tools or thinking feature
 - Ollama models with embedding support
