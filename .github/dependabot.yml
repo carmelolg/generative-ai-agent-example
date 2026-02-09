@@ -1,0 +1,39 @@
+# GitHub Dependabot configuration for automated dependency updates
+# This helps keep dependencies secure and up-to-date automatically
+
+version: 2
+updates:
+  # Enable updates for Python dependencies
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    # Limit number of open PRs to avoid overwhelming maintainers
+    open-pull-requests-limit: 5
+    # Automatically label PRs for easy filtering
+    labels:
+      - "dependencies"
+      - "python"
+    # Group minor and patch updates together to reduce PR volume
+    groups:
+      minor-and-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+    # Security updates are always separate and high priority
+    
+  # Enable updates for Docker base images
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "docker"

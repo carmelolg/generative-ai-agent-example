@@ -19,7 +19,7 @@ Educational project for Python developers wanting to build generative agents wit
 
 ## Prerequisites
 
-- **Python 3.10+**
+- **Python 3.11+**
 - **Ollama** installed and running (`ollama serve`)
 - Ollama models with tools or thinking feature
 - Ollama models with embedding support
@@ -128,6 +128,37 @@ Output: The spell to turn on a light is **Lumos**.
 - Integrate RAG: use embeddings for local documents.
 - Deploy: wrap in FastAPI for API endpoints.
 - Multi-tool: expand with calculator or file I/O.
+
+
+## Security and Dependency Management
+
+### Current Security Status
+- All dependencies pinned to latest secure versions
+- No known vulnerabilities (verified with pip-audit)
+- Python 3.12 base image for Docker (supported until October 2028)
+
+### Dependency Scanning
+To check for security vulnerabilities in dependencies:
+
+```bash
+# Install pip-audit
+pip install pip-audit
+
+# Scan dependencies
+pip-audit -r requirements.txt
+```
+
+### Keeping Dependencies Updated
+It is recommended to:
+1. Regularly check for dependency updates using `pip list --outdated`
+2. Review changelogs before updating to avoid breaking changes
+3. Run `pip-audit` after updates to verify security
+4. Consider enabling GitHub Dependabot for automated dependency updates
+
+### Supported Versions
+- **Python**: 3.11+ (3.12 recommended)
+- **Ollama**: 0.6.1
+- **Docker**: Latest stable with Python 3.12-slim base image
 
 
 # License
