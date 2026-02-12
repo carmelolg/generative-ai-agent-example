@@ -16,6 +16,8 @@ def add_hogwarts_theme():
     """Add Harry Potter/Hogwarts themed CSS to the page"""
     ui.add_head_html('''
     <style>
+        /* Google Fonts for authentic Harry Potter aesthetic
+           Using CDN for simplicity; consider self-hosting for production */
         @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Spectral:wght@300;400;600&display=swap');
         
         /* Main body styling with magical background */
@@ -49,7 +51,11 @@ def add_hogwarts_theme():
         /* Hogwarts house colors */
         :root {
             --gryffindor-gold: #D3A625;
+            --dark-gold: #B8860B;
+            --bright-gold: #FFD700;
             --gryffindor-red: #740001;
+            --dark-red: #5A0001;
+            --hover-red: #8B0001;
             --ravenclaw-blue: #0E1A40;
             --magic-purple: #4A148C;
             --parchment: #F4E8D0;
@@ -69,7 +75,7 @@ def add_hogwarts_theme():
         
         /* Sent messages (user) - styled as magical scrolls */
         .q-message-sent .q-message-text {
-            background: linear-gradient(135deg, var(--gryffindor-gold) 0%, #B8860B 100%) !important;
+            background: linear-gradient(135deg, var(--gryffindor-gold) 0%, var(--dark-gold) 100%) !important;
             color: var(--dark-wood) !important;
             border: 2px solid var(--gryffindor-red) !important;
             border-radius: 15px !important;
@@ -158,7 +164,7 @@ def add_hogwarts_theme():
         
         /* Send button - magical appearance */
         .q-btn {
-            background: linear-gradient(135deg, var(--gryffindor-red) 0%, #5A0001 100%) !important;
+            background: linear-gradient(135deg, var(--gryffindor-red) 0%, var(--dark-red) 100%) !important;
             color: var(--gryffindor-gold) !important;
             border: 2px solid var(--gryffindor-gold) !important;
             border-radius: 25px !important;
@@ -171,7 +177,7 @@ def add_hogwarts_theme():
         }
         
         .q-btn:hover {
-            background: linear-gradient(135deg, #8B0001 0%, var(--gryffindor-red) 100%) !important;
+            background: linear-gradient(135deg, var(--hover-red) 0%, var(--gryffindor-red) 100%) !important;
             box-shadow: 0 6px 20px rgba(116, 0, 1, 0.6), inset 0 1px 2px rgba(211, 166, 37, 0.5) !important;
             transform: translateY(-2px) !important;
         }
@@ -199,7 +205,7 @@ def add_hogwarts_theme():
         }
         
         .q-footer .q-markdown a:hover {
-            color: #FFD700 !important;
+            color: var(--bright-gold) !important;
             text-shadow: 0 0 15px rgba(255, 215, 0, 0.8) !important;
         }
         
@@ -218,7 +224,7 @@ def add_hogwarts_theme():
         }
         
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(180deg, #FFD700 0%, #8B0001 100%) !important;
+            background: linear-gradient(180deg, var(--bright-gold) 0%, var(--hover-red) 100%) !important;
         }
         
         /* Add subtle glow animation to gold elements */
@@ -249,7 +255,7 @@ def root():
                 <h1 style="
                     font-family: 'Cinzel', serif;
                     font-size: 2.5rem;
-                    color: #D3A625;
+                    color: var(--gryffindor-gold);
                     text-shadow: 0 0 20px rgba(211, 166, 37, 0.6), 0 0 40px rgba(116, 0, 1, 0.3);
                     margin: 0;
                     letter-spacing: 3px;
