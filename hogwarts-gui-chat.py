@@ -268,7 +268,7 @@ def root():
                     font-style: italic;
                 ">Seek magical wisdom from the Hogwarts Expert</p>
             </div>
-        ''')
+        ''', sanitize=None)
 
     async def send() -> None:
         question = text.value
@@ -300,4 +300,4 @@ def root():
             .classes('[&_a]:text-inherit [&_a]:no-underline [&_a]:font-medium')
 
 
-ui.run(root, title='Hogwarts Spell Chatbot', favicon='🪄', show_welcome_message=True, reconnect_timeout=6000)
+ui.run(root, title='Hogwarts Spell Chatbot', favicon='🪄', show_welcome_message=True, reconnect_timeout=100000)
